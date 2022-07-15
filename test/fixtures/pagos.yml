@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  IdPago: MyString
+  Fecha: 2022-07-14
+  ValorPagar: 1
+  IdAptoFK: MyString
+  Descripcion: MyText
+
+two:
+  IdPago: MyString
+  Fecha: 2022-07-14
+  ValorPagar: 1
+  IdAptoFK: MyString
+  Descripcion: MyText
