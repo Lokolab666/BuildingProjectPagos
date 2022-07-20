@@ -7,7 +7,9 @@ module Api
             end
 
             def showPagos
-                puts params[:id]
+                require 'openssl'
+                require 'base64'
+
                 json = File.read("public/dataPagos.json")
                 json = JSON.parse json
                 jsonT = json['pagos'].to_a
@@ -27,9 +29,26 @@ module Api
                     pagos.push(jsonT[i])
                 end
                 
-                #render json: pagos
+               # pagosStringUno = pagos[0].to_s
+                encripArray = []
+
+                public_key_file = "public/public.pem";
+                public_key = OpenSSL::PKey::RSA.new(File.read(public_key_file))
+
+                counter = 0
+                while counter < pagos.length
+                    encripArray.push(Base64.encode64(public_key.public_encrypt(pagos[counter].to_s)))
+                    counter = counter + 1
+                end
+                
+                encrypted_string = encripArray.to_s
+                
 
                 
+               #encrypted_string = Base64.encode64(public_key.public_encrypt(pagosString))
+
+                puts encrypted_string
+                render json: encrypted_string
 
             end
 
