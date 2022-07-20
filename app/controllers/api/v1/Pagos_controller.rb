@@ -6,10 +6,36 @@ module Api
                 render json: {status: 'SUCCESS', message: 'Loaded Pagos', data:pagos}, status: :ok
             end
 
-            def show
-                #pago = Pago.find(params[:id])
+            def showPagos
+                puts params[:id]
+                json = File.read("public/dataPagos.json")
+                json = JSON.parse json
+                jsonT = json['pagos'].to_a
+                res = jsonT.map{|o| o['IdApto']}
+                counter = 0
+                idPropiedad = params[:id]
+                pos = []
+                while counter < res.length
+                    if res[counter] == idPropiedad
+                        pos.push(counter)
+                    end
+                    counter = counter + 1
+                end
 
-                render json: {status: 'SUCCESS', message: 'Vista Pago', data:pago}, status: :ok
+                pagos = []
+                for i in pos
+                    pagos.push(jsonT[i])
+                end
+                
+                #render json: pagos
+
+                
+
+            end
+
+            def show
+                pagoTa = Pago.find(params[:id])
+                render json: {status: 'SUCCESS', message: 'Vista Pago', data:pagoTa}, status: :ok
             end
 
             def create
@@ -31,7 +57,7 @@ module Api
                   f.write(json.to_json)
                 end
                     
-            
+                
             
             
                 pago.destroy

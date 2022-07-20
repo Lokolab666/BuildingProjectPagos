@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_15_001720) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_19_201457) do
   create_table "pagos", charset: "utf8mb4", force: :cascade do |t|
     t.string "IdPago"
     t.date "Fecha"
@@ -19,6 +19,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_15_001720) do
     t.text "Descripcion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pagospe", primary_key: "IdPago", id: { type: :string, limit: 12 }, charset: "utf8mb4", force: :cascade do |t|
+    t.date "Fecha", null: false
+    t.integer "ValorPagar", null: false
+    t.string "IdAptoFK", limit: 11, null: false
+    t.string "Descripcion", limit: 30, null: false
   end
 
 end
