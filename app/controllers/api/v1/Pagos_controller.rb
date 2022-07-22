@@ -2,6 +2,7 @@ module Api
     module V1
         class PagosController < ApplicationController
             def index
+                #@sotr = Pago.pruebaf
                 pagos = Pago.order('created_at DESC');
                 render json: {status: 'SUCCESS', message: 'Loaded Pagos', data:pagos}, status: :ok
             end
@@ -59,7 +60,7 @@ module Api
 
             def create
                 pago = Pago.find(params[:id])
-                puts pago.IdPago
+                #puts pago.IdPago
                 render json: {status: 'SUCCESS', message: 'Vista Pago', data:pago}, status: :ok
                 json = File.read("public/dataPagos.json")
                 json = JSON.parse json
@@ -102,9 +103,9 @@ module Api
                 end
             end
 
-            #def postback
-           #     puts request.body.read    
-           # end
+            def pou
+            puts "hp"
+            end
 
             private
 
