@@ -1,8 +1,8 @@
 
     Pago.create(
-        IdPago: "777-887-7777",
-        Fecha: "2022-06-20",
+        IdPago: "859-887-2845",
+        Fecha: "2022-07-20",
         ValorPagar: "175000",
         IdAptoFK: "0879589702",
-        Descripcion: "Pago Junio"
+        Descripcion: "Pago Julio"
     )

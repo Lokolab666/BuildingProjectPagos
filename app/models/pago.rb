@@ -4,15 +4,13 @@ class Pago < ApplicationRecord
     validates :ValorPagar, presence: true
     validates :IdAptoFK, presence: true
     validates :Descripcion, presence: true
-    def self.pruebaf(i,j)
-        stoy = "Hola" 
-        stoy
-        puts stoy
+    def self.pruebaf(i,j,k)
         idpropiedades = getPropiedades
         indices = getIndicadorPro
         valorpago = calculo(indices[j])
+        fechames = validateFecha(k)
 
-        Pago.create(IdPago: randomId.to_s, Fecha: "2022-08-25", ValorPagar: valorpago, IdAptoFK: idpropiedades[i], Descripcion: "Pago Agosto");
+        Pago.create(IdPago: randomId.to_s, Fecha: "2022-#{k}-25", ValorPagar: valorpago, IdAptoFK: idpropiedades[i], Descripcion: fechames);
         puts "Completado"
     end
 
@@ -66,6 +64,20 @@ class Pago < ApplicationRecord
             return 125000
         else
             return 175000
+        end
+    end
+
+    def self.validateFecha(indice)
+        if indice == 8
+            return "Agosto"
+        elsif indice == 9
+            return "Septiembre"
+        elsif indice == 10
+            return "Octubre"
+        elsif indice == 11
+            return "Noviembre"
+        else
+            return "Diciembre"
         end
     end
 

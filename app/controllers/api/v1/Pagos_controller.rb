@@ -2,13 +2,12 @@ module Api
     module V1
         class PagosController < ApplicationController
             def index
-                #@sotr = Pago.pruebaf
                 pagos = Pago.order('created_at DESC');
                 render json: {status: 'SUCCESS', message: 'Loaded Pagos', data:pagos}, status: :ok
             end
 
             def showPagos
-                require 'openssl'
+                require 'openssl' #Generar llaves
                 require 'base64'
 
                 json = File.read("public/dataPagos.json")
@@ -30,7 +29,6 @@ module Api
                     pagos.push(jsonT[i])
                 end
                 
-               # pagosStringUno = pagos[0].to_s
                 encripArray = []
 
                 public_key_file = "public/public.pem";
@@ -45,10 +43,7 @@ module Api
                 encrypted_string = encripArray.to_s
                 
 
-                
-               #encrypted_string = Base64.encode64(public_key.public_encrypt(pagosString))
-
-                puts encrypted_string
+               # puts encrypted_string
                 render json: encrypted_string
 
             end
@@ -77,15 +72,7 @@ module Api
                   f.write(json.to_json)
                 end
                     
-                
-            
-            
                 pago.destroy
-                #if pago.save
-                #    render json: {status: 'SUCCESS', message: 'Guardado Pago', data:pago}, status: :ok
-                #else
-                #    render json: {status: 'ERROR', message: 'No Guardado Pago', data:pago.errors}, status: :unprocessable_entity
-                #end
             end
 
             def destroy
@@ -103,9 +90,6 @@ module Api
                 end
             end
 
-            def pou
-            puts "hp"
-            end
 
             private
 
